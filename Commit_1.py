@@ -8,9 +8,10 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+#COMMIT 1
 mycursor.execute("CREATE DATABASE IF NOT EXISTS DatabaseVerifica")
 mycursor.execute("USE DatabaseVerifica")
-mycursor.execute("CREATE TABLE Automobili (id INT PRIMARY KEY AUTO_INCREMENT , Marca VARCHAR(255), Modello VARCHAR(255), Anno INT, Tipo_carburante VARCHAR(255), Cilindrata VARCHAR(255))")
+mycursor.execute("CREATE TABLE IF NOT EXISTS Automobili (id INT PRIMARY KEY AUTO_INCREMENT , Marca VARCHAR(255), Modello VARCHAR(255), Anno INT, Tipo_carburante VARCHAR(255), Cilindrata VARCHAR(255))")
 sql = "INSERT INTO Automobili (Marca, Modello, Anno, Tipo_carburante, Cilindrata) VALUES (%s, %s,%s,%s,%s)"
 val = [
   ('Toyota', 'Corolla', 2023, 'Ibrida', 1800),
@@ -28,3 +29,4 @@ mycursor.executemany(sql, val)
 mydb.commit()
 
 print(mycursor.rowcount, "record inserted.")
+
